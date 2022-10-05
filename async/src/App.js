@@ -4,8 +4,15 @@ const setPromise = (time, text) =>
   new Promise((resolve, reject) => {
     setTimeout(() => {
       console.log(text);
+      resolve();
     }, time);
   });
+
+const func = async () => {
+  await setPromise(2000, "Thanks");
+  await setPromise(1000, "Goodbye");
+  return "ME";
+};
 
 function App() {
   useEffect(() => {
@@ -22,11 +29,12 @@ function App() {
   });
 
   setPromise(2000, "good morning")
-    .then(() => setPromise(1000, "have"))
-    .then(() => setPromise(1000, "a"))
-    .then(() => setPromise(1000, "nice"))
+    .then(() => setPromise(1000, "good"))
     .then(() => setPromise(1000, "day"));
 
+  func().then((me) => {
+    console.log("END", me);
+  });
   return <div className="App"></div>;
 }
 
